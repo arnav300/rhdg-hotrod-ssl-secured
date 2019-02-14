@@ -85,15 +85,15 @@ $ git clone https://github.com/mcouliba/rhdg-hotrod-ssl-secured.git
 $ cd rhdg-hotrod-ssl-secured
 ~~~
 
-2. Edit src/main/ressources/jdg.properties as following
+2. Edit `src/main/ressources/jdg.properties` as following
 
 ~~~
 jdg.host=secure-datagrid-app-hotrod-rhdg.<Openshift Application Suffix>
 jdg.hotrod.port=443
 ~~~
 
-IMPORTANT: For the following step, you need to extract the trusted certificate provided by Openshift
-IMPORTANT: You can use a WebBrowser by clicking on the HTTPS route then export the certificate into openshift.crt
+> IMPORTANT: For the following step, you need to extract the trusted certificate provided by Openshift
+> You can use a WebBrowser by clicking on the HTTPS route then export the certificate into `openshift.crt`
 
 3. Import the trusted certificate into a new trustore for the Java application
 
