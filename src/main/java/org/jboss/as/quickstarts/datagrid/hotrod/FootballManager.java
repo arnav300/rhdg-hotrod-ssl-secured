@@ -200,15 +200,22 @@ public class FootballManager {
 
         // add server host and server port we are connecting to
         config.addServer().host(jdgProperty(JDG_HOST)).port(Integer.parseInt(jdgProperty(HOTROD_PORT)));
+
+        // !! WARNING !! Outside Openshift, because we cannot access to the pods directly,
+        // we have to disable the TOPOLOGY_AWARE capability of the Hot Rod client.
+        // With BASIC, the client doesn't handle server topology changes and therefore 
+        // will only used the list of servers supplied at configuration time
         config.clientIntelligence(ClientIntelligence.BASIC);
-        // add configuration for authentication
 
         config.security()
+            // add configuration for SSL
             .ssl()
-            .enable()
+                .enable()
                 .sniHostName(jdgProperty(JDG_HOST))
                 .trustStoreFileName(tccl.getResource("truststore.jks").getPath())
                 .trustStorePassword("mykeystorepass".toCharArray())
+            
+            // add configuration for authentication
             .authentication()
                 .enable()
                 .serverName(SERVER_NAME) //define server name, should be specified in XML configuration
